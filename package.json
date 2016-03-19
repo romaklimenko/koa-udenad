@@ -1,0 +1,15 @@
+{
+  "name": "udenad",
+  "version": "1.0.0",
+  "description": "udenad (adverbium) – by heart, memorize, learn by rote",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": {
+    "name": "Roman Klimenko",
+    "email": "romaklimenko@gmail.com",
+    "url": "http://romaklimenko.com"
+  },
+  "license": "MIT"
+}
