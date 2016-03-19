@@ -11,5 +11,8 @@
     "email": "romaklimenko@gmail.com",
     "url": "http://romaklimenko.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^1.2.0"
+  }
 }
