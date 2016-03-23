@@ -1,10 +1,20 @@
 const koa = require('koa')
 const router = require('koa-router')()
+const session = require('koa-session')
 
 const app = koa()
 
+// session
+app.keys = ['Næ næ næ næ næ, det må vi ikke']
+app.use(session(app))
+
+
+// router
 router.get('/', function* (next) {
-  this.body = 'Hello root'
+  if (this.path === '/favicon.ico') return
+  const n = this.session.views || 0
+  this.session.views = ++n
+  this.body = n + ' views'
 })
 
 router.post('/session', function* (next) {
@@ -27,9 +37,8 @@ router.delete('/account', function* (next) {
   this.body = 'deletes an account'
 })
 
-
-
 app.use(router.routes())
 app.use(router.allowedMethods())
+
 
 module.exports = app
