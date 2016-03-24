@@ -17,12 +17,13 @@ router.get('/', function* (next) {
   this.body = n + ' views'
 })
 
-router.post('/session', function* (next) {
-  this.body = 'returns a session key, sets a cookie'
+router.post('/login', function* (next) {
+  this.assert(this.request.header.user, true,
+    'A required parameter \'user\' is missing.')
 })
 
-router.delete('/session', function* (next) {
-  this.body = 'deletes a session key from server'
+router.post('/logout', function* (next) {
+  this.body = 'logs user out'
 })
 
 router.post('/account', function* (next) {

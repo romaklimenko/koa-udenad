@@ -14,29 +14,29 @@ describe('app', () => {
     })
   })
 
-  describe('GET /session', () => {
+  describe('GET /login', () => {
     it('should response with status 405 "Method Not Allowed"', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
-        .get('/session')
+        .get('/login')
         .expect(405, done)
     })
   })
 
-  describe('POST /session', () => {
+  describe('POST /login', () => {
     xit('should response with status 200', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
-        .post('/session')
+        .post('/login')
         .expect(200, done)
     })
   })
 
-  describe('DELETE /session', () => {
+  describe('POST /logout', () => {
     xit('should response with status 200', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
-        .delete('/session')
+        .post('/logout')
         .expect(200, done)
     })
   })
@@ -67,9 +67,4 @@ describe('app', () => {
         .expect(200, done)
     })
   })
-
-  // POST /account - creates a new account
-  //  PUT /account - updates an account
-  //  DELETE /account - deletes an account
-
 })
