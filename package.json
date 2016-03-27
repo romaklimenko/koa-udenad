@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "koa": "^1.2.0",
     "koa-router": "^5.4.0",
     "koa-session": "^3.3.1"
