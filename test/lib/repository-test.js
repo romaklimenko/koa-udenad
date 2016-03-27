@@ -11,6 +11,7 @@ describe('lib/db', () => {
   let repository
   const username = 'søren'
   const password = 'kirkegaard'
+  const wrong_password = 'kirkegAard'
 
   before((done) => {
     MongoClient.connect(url, (err, db) => {
@@ -26,6 +27,30 @@ describe('lib/db', () => {
 
   after(() => {
     repository.db.close()
+  })
+
+  describe('checkAccount(username, password)', () => {
+    it('should return true if username and password are correct', () => {
+      return repository.createAccount(username, password).then((user) => {
+        return repository.checkAccount(username, password).then((result) => {
+          assert.equal(result, true)
+        })
+      })
+    })
+
+    it('should return false if password is not correct', () => {
+      return repository.createAccount(username, password).then((user) => {
+        return repository.checkAccount(username, wrong_password).then((result) => {
+          assert.equal(result, false)
+        })
+      })
+    })
+
+    it('should return false if user does not exist', () => {
+      return repository.checkAccount(username, password).then((result) => {
+        assert.equal(result, false)
+      })
+    })
   })
 
   describe('createAccount(username, password)', () => {
