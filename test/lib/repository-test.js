@@ -21,7 +21,7 @@ describe('lib/db', () => {
   })
 
   beforeEach(() => {
-    repository.db.collection('users').remove({})
+    repository.users().remove({})
   })
 
   after(() => {
@@ -30,10 +30,39 @@ describe('lib/db', () => {
 
   describe('createAccount(username, password)', () => {
     it('should create a new account', () => {
-      const users = repository.db.collection('users')
+      const users = repository.users()
       return repository.createAccount(username, password).then((value) => {
         return users.findOne({ username: username }).then((user) => {
           assert.equal(user._id.toString(), value.insertedId)
+        })
+      })
+    })
+
+    xit('should check for unique account name', () => { })
+    xit('should check for all necessary parameters', () => { })
+  })
+
+  describe('getAccount(name)', () => {
+    it('should get account by name', () => {
+      const account0 = repository.createAccount('admin', 'b')
+      const account1 = repository.createAccount(username, password)
+      const account2 = repository.createAccount('user', 'u')
+
+      return Promise.all([account0, account1, account2]).then(() => {
+        return repository.getAccount(username).then((user) => {
+          assert.equal(user.username, username)
+        })
+      })
+    })
+
+    it('should get null if user does not exist', () => {
+      const account0 = repository.createAccount('admin', 'b')
+      const account1 = repository.createAccount(username, password)
+      const account2 = repository.createAccount('user', 'u')
+
+      return Promise.all([account0, account1, account2]).then(() => {
+        return repository.getAccount('fantomas').then((user) => {
+          assert.equal(user, null)
         })
       })
     })
