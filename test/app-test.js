@@ -30,6 +30,8 @@ describe('app', () => {
         .post('/login')
         .expect(200, done)
     })
+
+    xit('should login', () => { })
   })
 
   describe('POST /logout', () => {
@@ -39,32 +41,18 @@ describe('app', () => {
         .post('/logout')
         .expect(200, done)
     })
+
+    xit('should logout', () => { })
   })
 
   describe('POST /account', () => {
-    xit('should response with status 200', (done) => {
+    it('should response with status 200', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
         .post('/account')
         .expect(200, done)
     })
-  })
 
-  describe('PUT /account', () => {
-    xit('should response with status 200', (done) => {
-      const app = appFactory
-      request(http.createServer(app.callback()))
-        .put('/account')
-        .expect(200, done)
-    })
-  })
-
-  describe('DELETE /account', () => {
-    xit('should response with status 200', (done) => {
-      const app = appFactory
-      request(http.createServer(app.callback()))
-        .delete('/account')
-        .expect(200, done)
-    })
+    xit('should create a new account', () => { })
   })
 })

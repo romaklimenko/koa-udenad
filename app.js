@@ -30,16 +30,7 @@ router.post('/account', function* (next) {
   this.body = 'creates a new account'
 })
 
-router.put('/account', function* (next) {
-  this.body = 'updates an account'
-})
-
-router.delete('/account', function* (next) {
-  this.body = 'deletes an account'
-})
-
 app.use(router.routes())
 app.use(router.allowedMethods())
-
 
 module.exports = app
