@@ -27,7 +27,7 @@ describe('lib/db', () => {
   })
 
   after(() => {
-    repository.db.close()
+    return repository.db.close()
   })
 
   describe('checkAccount(username, password)', () => {
@@ -76,7 +76,13 @@ describe('lib/db', () => {
       })
     })
 
-    xit('should check for all necessary parameters', () => { })
+    it('should check for username parameter', () => {
+      assert.throws(() => { repository.createAccount('', password) })
+    })
+
+    it('should check for password parameter', () => {
+      assert.throws(() => { repository.createAccount(username, '') })
+    })
   })
 
   describe('getAccount(name)', () => {
