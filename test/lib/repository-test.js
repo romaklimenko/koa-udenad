@@ -22,7 +22,7 @@ describe('lib/db', () => {
   })
 
   beforeEach(() => {
-    repository.users().remove({})
+    repository.users.remove({})
   })
 
   after(() => {
@@ -55,7 +55,7 @@ describe('lib/db', () => {
 
   describe('createAccount(username, password)', () => {
     it('should create a new account', () => {
-      const users = repository.users()
+      const users = repository.users
       return repository.createAccount(username, password).then((value) => {
         return users.findOne({ username: username }).then((user) => {
           assert.equal(user._id.toString(), value.insertedId)
