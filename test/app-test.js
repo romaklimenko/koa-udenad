@@ -24,35 +24,29 @@ describe('app', () => {
   })
 
   describe('POST /login', () => {
-    xit('should response with status 200', (done) => {
+    xit('should login', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
         .post('/login')
         .expect(200, done)
     })
-
-    xit('should login', () => { })
   })
 
   describe('POST /logout', () => {
-    xit('should response with status 200', (done) => {
+    xit('should logout', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
         .post('/logout')
         .expect(200, done)
     })
-
-    xit('should logout', () => { })
   })
 
   describe('POST /account', () => {
-    it('should response with status 200', (done) => {
+    it('should create a new account', (done) => {
       const app = appFactory
       request(http.createServer(app.callback()))
         .post('/account')
         .expect(200, done)
     })
-
-    xit('should create a new account', () => { })
   })
 })
