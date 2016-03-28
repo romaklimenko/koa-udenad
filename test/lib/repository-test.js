@@ -22,7 +22,7 @@ describe('lib/db', () => {
   })
 
   beforeEach(() => {
-    repository.users.remove({})
+    return repository.users.remove({})
   })
 
   after(() => {
