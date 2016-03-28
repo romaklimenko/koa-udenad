@@ -4,6 +4,7 @@ const assert = require('assert')
 const MongoClient = require('mongodb').MongoClient
 
 const Repository = require('../../lib/repository')
+const init = require('../../db/init')
 
 const url = 'mongodb://localhost:27017/udenad_test'
 
@@ -22,7 +23,7 @@ describe('lib/db', () => {
   })
 
   beforeEach(() => {
-    return repository.users.remove({})
+    return init(repository.db)
   })
 
   after(() => {
@@ -55,15 +56,26 @@ describe('lib/db', () => {
 
   describe('createAccount(username, password)', () => {
     it('should create a new account', () => {
-      const users = repository.users
       return repository.createAccount(username, password).then((value) => {
-        return users.findOne({ username: username }).then((user) => {
+        return repository.users.findOne({ username: username }).then((user) => {
           assert.equal(user._id.toString(), value.insertedId)
         })
       })
     })
 
-    xit('should check for unique account name', () => { })
+    it('should not create an account if such username already exists', () => {
+      const db_name = repository.db.databaseName
+      return repository.createAccount(username, password).then(() => {
+        return repository.createAccount(username, password)
+          .then(() => { assert.fail('Two users with the same username!') })
+          .catch((reason) => {
+            assert.equal(
+              reason.message,
+              `E11000 duplicate key error index: ${db_name}.users.$username_1 dup key: { : "${username}" }`)
+          })
+      })
+    })
+
     xit('should check for all necessary parameters', () => { })
   })
 
