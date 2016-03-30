@@ -18,8 +18,9 @@ router.get('/', function* (next) {
 })
 
 router.post('/login', function* (next) {
-  this.assert(this.request.header.user, true,
-    'A required parameter \'user\' is missing.')
+  this.assert(this.request.header.username, 'The parameter "username" must not be empty')
+  this.assert(this.request.header.password, 'The parameter "password" must not be empty')
+  this.body = 'logs user in'
 })
 
 router.post('/logout', function* (next) {

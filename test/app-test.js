@@ -24,11 +24,13 @@ describe('app', () => {
   })
 
   describe('POST /login', () => {
-    xit('should login', (done) => {
+    xit('should login', () => {
       const app = appFactory
-      request(http.createServer(app.callback()))
+      return request(http.createServer(app.callback()))
         .post('/login')
-        .expect(200, done)
+        .set('username', 'roma')
+        .set('password', 'amor')
+        .expect(200)
     })
   })
 
