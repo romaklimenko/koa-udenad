@@ -15,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^0.8.5",
     "koa": "^1.2.0",
+    "koa-mongo": "^0.5.0",
     "koa-router": "^5.4.0",
     "koa-session": "^3.3.1",
     "mongodb": "^2.1.11"
